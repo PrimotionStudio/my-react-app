@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import './App.css';
+import { useState } from 'react';
+import Header from './components/Header';
 
 function App() {
-	const [name, setName] = useState('Prime');
 	const [events, setEvents] = useState([
 		{
 			id: 1,
@@ -12,33 +12,48 @@ function App() {
 		{ id: 2, title: 'Wedding', description: 'Lorem ipsum dolor sit amet.' },
 		{ id: 3, title: 'Burial', description: 'Lorem ipsum dolor sit amet.' },
 	]);
-
-	const changeName = (e) => {
-		const newName = prompt("What's your new name", name);
-		setName(newName);
-	};
+	const [toggleEvents, setToggleEvents] = useState(true);
 
 	const deleteEvent = (eventId) => {
-		const remainingEvents = events.filter((event) => event.id !== eventId);
-		setEvents(remainingEvents);
+		setEvents((currentEvents) => {
+			const remainingEvents = currentEvents.filter(
+				(event) => event.id !== eventId
+			);
+			return remainingEvents;
+		});
+	};
+	// console.log(toggleEvents);
+	// setToggleEvents(toggleEvents);
+	const showEvents = (e) => {
+		setToggleEvents(true);
+	};
+	const hideEvents = (e) => {
+		setToggleEvents(false);
 	};
 	return (
 		<div className='App'>
-			<h1>My name is {name}</h1>
-			<button onClick={changeName}>Change Name</button>
-
-			{events.map((event, index) => (
-				<div key={event.id}>
-					<h3>
-						{index} - {event.title}
-					</h3>
-					<p>{event.description}</p>
-					<button onClick={() => deleteEvent(event.id)}>
-						Delete Event
-					</button>
-					<hr></hr>
-				</div>
-			))}
+			<Header />
+			<h2 className='my-events'>
+				<p>My Events - Event Count: {events.length}</p>
+				{toggleEvents && (
+					<button onClick={hideEvents}>Hide Events</button>
+				)}
+				{!toggleEvents && (
+					<button onClick={showEvents}>Show Events</button>
+				)}
+			</h2>
+			{toggleEvents &&
+				events.map((event, index) => (
+					<div key={event.id} className='event'>
+						<h3>
+							{index} - {event.title}
+						</h3>
+						<p>{event.description}</p>
+						<button onClick={() => deleteEvent(event.id)}>
+							Delete Event
+						</button>
+					</div>
+				))}
 		</div>
 	);
 }
