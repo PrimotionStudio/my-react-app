@@ -1,0 +1,23 @@
+.modal-backdrop {
+	background-color: #000000d2;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: ease-in background-color 2s;
+}
+.modal {
+	background-color: #ffffff;
+	border-radius: 1rem;
+	text-align: start;
+	padding: 2.5rem 2.5rem;
+	width: 40%;
+}
+.modal:nth-child(even) {
+	margin: 1rem 0;
+}

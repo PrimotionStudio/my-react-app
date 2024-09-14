@@ -13,6 +13,10 @@ h2.my-events p {
 	text-decoration: underline;
 }
 
+h2.my-events div button {
+	margin: 0 0.5rem;
+}
+
 button {
 	background-color: #13131373;
 	color: #ffffff;

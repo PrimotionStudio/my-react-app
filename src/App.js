@@ -1,8 +1,11 @@
 import './App.css';
 import { useState } from 'react';
 import Header from './components/Header';
+import Modal from './components/Modal';
+import EventList from './components/EventList';
 
 function App() {
+	const [showModal, setShowModal] = useState(false);
 	const [events, setEvents] = useState([
 		{
 			id: 1,
@@ -22,38 +25,43 @@ function App() {
 			return remainingEvents;
 		});
 	};
-	// console.log(toggleEvents);
-	// setToggleEvents(toggleEvents);
 	const showEvents = (e) => {
 		setToggleEvents(true);
 	};
 	const hideEvents = (e) => {
 		setToggleEvents(false);
 	};
+
 	return (
 		<div className='App'>
-			<Header />
+			<Header title={"Prime's Worldwide Event Centre"} />
 			<h2 className='my-events'>
 				<p>My Events - Event Count: {events.length}</p>
-				{toggleEvents && (
-					<button onClick={hideEvents}>Hide Events</button>
-				)}
-				{!toggleEvents && (
-					<button onClick={showEvents}>Show Events</button>
-				)}
+				<div>
+					{toggleEvents && (
+						<button onClick={hideEvents}>Hide Events</button>
+					)}
+					{!toggleEvents && (
+						<button onClick={showEvents}>Show Events</button>
+					)}
+					<button onClick={() => setShowModal(true)}>
+						Show Modal
+					</button>
+				</div>
 			</h2>
-			{toggleEvents &&
-				events.map((event, index) => (
-					<div key={event.id} className='event'>
-						<h3>
-							{index} - {event.title}
-						</h3>
-						<p>{event.description}</p>
-						<button onClick={() => deleteEvent(event.id)}>
-							Delete Event
-						</button>
-					</div>
-				))}
+			{toggleEvents && (
+				<EventList events={events} deleteEvent={deleteEvent} />
+			)}
+			{showModal && (
+				<Modal handleClose={() => setShowModal(false)}>
+					<h2>Give Me Mula</h2>
+					<p>Donate to support the development of Give Me Mula.</p>
+					<p>
+						Lorem ipsum dolor sit, amet consectetur adipisicing
+						elit. Accusantium, blanditiis.
+					</p>
+				</Modal>
+			)}
 		</div>
 	);
 }
