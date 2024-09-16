@@ -1,0 +1,21 @@
+.neweventform h2 {
+	border-bottom: 1px solid #555;
+}
+
+.neweventform,
+.neweventform label {
+	display: flex;
+	flex-direction: column;
+}
+
+.neweventform label,
+.neweventform textarea,
+.neweventform input {
+	margin-bottom: 10px auto;
+	padding: 10px;
+}
+
+.neweventform h2,
+.neweventform button {
+	margin: 10px 20px;
+}

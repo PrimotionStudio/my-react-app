@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import Modal from './components/Modal';
 import EventList from './components/EventList';
+import NewEventForm from './components/NewEventForm';
 
 function App() {
 	const [showModal, setShowModal] = useState(false);
@@ -45,7 +46,7 @@ function App() {
 						<button onClick={showEvents}>Show Events</button>
 					)}
 					<button onClick={() => setShowModal(true)}>
-						Show Modal
+						Add New Event
 					</button>
 				</div>
 			</h2>
@@ -54,12 +55,7 @@ function App() {
 			)}
 			{showModal && (
 				<Modal handleClose={() => setShowModal(false)}>
-					<h2>Give Me Mula</h2>
-					<p>Donate to support the development of Give Me Mula.</p>
-					<p>
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Accusantium, blanditiis.
-					</p>
+					<NewEventForm />
 				</Modal>
 			)}
 		</div>
